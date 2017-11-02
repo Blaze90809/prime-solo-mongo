@@ -1,1 +1,25 @@
 # prime-solo-mongo
+
+//Create a collection called orders.
+1. db.createCollection('orders')
+
+//Insert at least 3 documents that represent an order. 
+2.  orders.insert({date: ISODate("2017-01-02")}); orders.insert({date: ISODate("2017-04-04")}); orders.insert({date: ISODate("2017-02-03")});
+
+//Find all of the orders and make them look pretty.
+3.  orders.find().pretty()
+
+//Change the first lineItem in the order from 1/2/2017 to be for 2 'transistor radio's
+4. orders.find({"date":{$gt: ISODate("2017-01-31")}})
+
+//Change the first lineItem in the order from 1/2/2017 to be for 2 'transistor radio's
+5. orders.update({"_id" : ObjectId("59fb6796b1258dce55b0f2bd")}, {$push:{orderTotal:63}})
+
+//Change the first lineItem in the order from 1/2/2017 to be for 2 'transistor radio's
+6. orders.update({"_id" : ObjectId("59fb67c7b1258dce55b0f2be")}, {$push:{lineItem:{quantity: 7}}});
+
+//Change the first lineItem in the order from 1/2/2017 to be for 2 'transistor radio's
+7. orders.update({"_id" : ObjectId("59fb67cfb1258dce55b0f2bf")}, {$set:{"lineItem.0.quantity":{"order": "2 transistor radios"}}})
+
+//find orders with lineitems greater than 2 but less than 10
+8. orders.find({results:{$elemMatch:{quantity: {$lt: 10}},{quantity: { $gte: 2}}}})
